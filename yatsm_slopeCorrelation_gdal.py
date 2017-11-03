@@ -9,7 +9,7 @@ import os
 from osgeo import gdal, osr
 import numpy as np
 
-directory = r"Z:\NASA_Himalaya_Project\YATSM\YATSM_processOutput\test_allcoefb5"  #The directory where coefficient image time series are
+directory = r"Z:\NASA_Himalaya_Project\YATSM\YATSM_processOutput\yatsm_testData_allcoefb5"  #The directory where coefficient image time series are
 
 os.chdir(directory)
 files = os.listdir(directory)  # Read files in the directory where coefficient image time series are
