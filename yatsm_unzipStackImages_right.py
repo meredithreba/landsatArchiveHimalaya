@@ -13,7 +13,6 @@ os.chdir(directory)
 files = os.listdir(directory)
 # folder for the outfiles to go to for intermediate/temp files
 outdirbase= r'/home/fas/seto/bc643/project/test/Junk'
-#outdirbase= r'Z:\NASA_Himalaya_Project\Satellite_imagery\Junk'
 
 # work through the folders -- could you use walk function instead? i think we used it for UC
 # if there is nothing in the out directory then loop through the length of directories
@@ -53,12 +52,11 @@ for x in range(0,len(alldirs)):
 
 # need to open the file first and make it writeable by indicating "w"
 thefile = open('/home/fas/seto/bc643/project/test/'+ 'test.txt', 'w')
-#thefile = open('Z:/NASA_Himalaya_Project/Satellite_imagery/'+ 'test.txt', 'w')
 
 # loop through the list of all band1 files
 for item in allfilesband1:
-    #write the list to a file but you must open the file first which is done in the step above
-  thefile.write("%s\n" % item)
+	#write the list to a file but you must open the file first which is done in the step above
+	thefile.write("%s\n" % item)
 # close the file
 thefile.close()
 # change the directory back to the Dehradun sample images
@@ -69,14 +67,12 @@ os.chdir(directory)
 # potentially applied and various kinds of metadata altered or added.
 # the resulting file can be edited to modify mappings and metadata for other purposes
 # this line builds the vrt of all the images in the input file list and takes the largest extent
-os.system('gdalbuildvrt -separate -input_file_list /home/fas/seto/bc643/project/test/test1a.txt /home/fas/seto/bc643/project/test/out.vrt')
-#os.system('gdalbuildvrt -separate -input_file_list Z:/NASA_Himalaya_Project/Satellite_imagery/test.txt Z:/NASA_Himalaya_Project/Satellite_imagery/out.vrt')
+os.system('gdalbuildvrt -separate -input_file_list /home/fas/seto/bc643/project/test/test.txt /home/fas/seto/bc643/project/test/out.vrt')
 # gdal_translate can be used to convert raster data between different formats, potentially performing some operations
 # like subsettings, resampling, or rescaling pixels. we are using it to edit the extent
 #Then we will use this later to unify all bands
 # we take the out VRT for band1 and convert it to an out GTiff
-os.system('gdal_translate /home/fas/seto/bc643/project/test/out1a.vrt -b 1 -of GTiff /home/fas/seto/bc643/project/test/out.tif')
-#os.system('gdal_translate Z:/NASA_Himalaya_Project/Satellite_imagery/out.vrt -b 1 -of GTiff Z:/NASA_Himalaya_Project/Satellite_imagery/out.tif')
+os.system('gdal_translate /home/fas/seto/bc643/project/test/out.vrt -b 1 -of GTiff /home/fas/seto/bc643/project/test/out.tif')
 
 print "All Done"
 
@@ -101,13 +97,11 @@ for x in range(0,len(alldirs)):
 	filesqa = filesqa[0] # append the quality band first in list/stack?
 	files.append(filesqa)
 
-	files.append(r"/home/fas/seto/bc643/project/test/out1a.tif") # append the outtif from before to the files/image stack
-	#files.append(r"Z:\NASA_Himalaya_Project\Satellite_imagery\out.tif") # append the outtif from before to the files/image stack
+	files.append(r"/home/fas/seto/bc643/project/test/out.tif") # append the outtif from before to the files/image stack
 
 	# create names for the new directories by splitting the direcory name after the 4th set of /
 	# which includes the image name
 	outdir = '/home/fas/seto/bc643/project/test/ImageStack/' + presentdir.split('/')[8]
-	#outdir = 'Z:/NASA_Himalaya_Project/Satellite_imagery/ImageStack/' + presentdir.split('/')[4]
 
 	# make a new out directory
 	os.mkdir(outdir)
