@@ -32,7 +32,7 @@ topCor <- function(n){
 	###############################################################
 	#e.g., /home/fas/seto/bc643/scratch60/grace1/141041clipped/LC081410412013042401T1_clipped
 	#files[n+nodes*tasks_per_node]to avoid the .log files
-	wkdir <- paste0("/home/fas/seto/bc643/project/scratch60_temp/141041Imagestack/",files[n+65],sep='')
+	wkdir <- paste0("/home/fas/seto/bc643/project/scratch60_temp/141041Imagestack/",files[n+12],sep='')
 	print(wkdir)
 	setwd(wkdir)
 	files1 <- list.files()
