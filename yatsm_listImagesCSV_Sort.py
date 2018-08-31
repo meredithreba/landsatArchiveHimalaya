@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Oct 08 14:22:52 2017
-
-@author: pb438
-"""
-
 import os, datetime,numpy
-imdir = r'/home/fas/seto/mra37/project/ImageStack/ImageStack_145040'
+######################################################################################################
+imdir = r'/home/fas/seto/bc643/scratch60/grace1/micro/Nigeria/Nigeria'
 dirs = os.listdir(imdir)
 dirs =[os.path.join(imdir,x) for x in dirs]
 
@@ -15,6 +9,7 @@ b = [a]
 for i in range(0,len(dirs)):
     files = os.listdir(dirs[i])
     files.sort()
+    print(dirs[i])
     filename = files[1]  #LE07_L1TP_146039_19990920_20170217_01_T1_MTL.txt
     date = filename.split('_')[3]
     year= date[0:4]
@@ -34,24 +29,27 @@ for i in range(0,len(dirs)):
     date = str(year) + julianday  #e.g., 1999263
     out = [date,''.join([str(files[0]).split('.')[0][:2],str(files[0]).split('.')[0][3]]),os.path.join(dirs[i],str(files[0]))]  #e.g., ['1999263','LE7','F:\\Himalaya\\Landsat\\ImageStack\\LE071460391999092001T1-SC20171003013820\\LE071460391999092001T1.tif']    
     b.append(out)
+    print(i)
 
 import sys, csv
 # Note: change this output name for each path & row tile
-with open("/home/fas/seto/mra37/project/csvlist/p145r040.csv",'wb') as resultFile:  #'wb': write and binary; The with statement clarifies code that previously would use try...finally blocks to ensure that clean-up code is executed.
+##########################################################################################
+with open("/home/fas/seto/bc643/project/csvlist/Nigeria.csv",'wb') as resultFile:  
     wr = csv.writer(resultFile, dialect='excel')
     for val in b:
         wr.writerows([val])
 
 #print(b)
 
-reader = csv.reader(open("/home/fas/seto/mra37/project/csvlist/p145r040.csv"), delimiter=",")
+##########################################################################################
+reader = csv.reader(open("/home/fas/seto/bc643/project/csvlist/Nigeria.csv"), delimiter=",")
 sortedlist = sorted(reader, key=lambda row: row[0], reverse=False)
-
-with open("/home/fas/seto/mra37/project/csvlist/p145r040_csvListSorted.csv",'wb') as sortedResultFile:  #'wb': write and binary; The with statement clarifies code that previously would use try...finally blocks to ensure that clean-up code is executed.
+##########################################################################################
+with open("/home/fas/seto/bc643/project/csvlist/Nigeria_sorted.csv",'wb') as sortedResultFile:  
     wr = csv.writer(sortedResultFile, dialect='excel')
     wr.writerow(sortedlist[len(sortedlist)-1])
     for rowid,row in enumerate(sortedlist):	
         if rowid <> len(sortedlist)-1:    
             wr.writerows([row])
-       
-#print(sortedlist)
+##########################################################################################       
+os.remove("/home/fas/seto/bc643/project/csvlist/Nigeria.csv")
