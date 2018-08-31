@@ -8,27 +8,27 @@ version: "0.7.0"
 
 dataset:
     # Text file containing dates and images
-    input_file: "/home/fas/seto/bc643/project/csvlist/p141r041ThermOLI_clipped_sorted.csv"
+    input_file: "/home/fas/seto/bc643/project/csvlist/141041_clipped_TC_SE_5bandsqa_sorted.csv"
     # Input date format
     date_format: "%Y%j"
     # Output location
-    output: "/home/fas/seto/bc643/scratch60/grace1/yatsm_out/141041ThermOLI_clipped_out"
+    output: "/home/fas/seto/bc643/scratch60/grace1/yatsm_out/141041_clipped_TC_SE_5bandsqa_out_0814"
     # Output file prefix (e.g., [prefix]_[line].npz)
     output_prefix: "yatsm_r"
     # Total number of bands
-    n_bands: 8
+    n_bands: 6
     # Mask band (e.g., Fmask)
-    mask_band: 8
+    mask_band: 6
     # List of integer values to mask within the mask band
-    mask_values: [72, 136, 80, 112, 144, 176, 96, 112, 160, 176, 224, 328, 392, 840, 904, 1350, 336, 368, 400, 432, 848, 880, 912, 944, 1352, 352, 368, 416, 432, 480, 864, 880, 928, 944, 992, 1346, 1348, 1350, 1352]
+    mask_values: [1, 68, 132, 72, 136, 80, 112, 144, 176, 96, 112, 160, 176, 224, 328, 392, 840, 904, 1350, 336, 368, 400, 432, 848, 880, 912, 944, 1352, 352, 368, 416, 432, 480, 864, 880, 928, 944, 992, 1346, 1348, 1350, 1352]
     # Valid range of band data
     # specify 1 range for all bands, or specify ranges for each band
-    min_values: 0
-    max_values: 10000
+    min_values: -32767
+    max_values: 32768
     # Use BIP image reader? If not, use GDAL to read in
     use_bip_reader: False
     # Directory location for caching dataset lines
-    cache_line_dir: "/home/fas/seto/bc643/scratch60/grace1/yatsm_cache/141041ThermOLI_clipped_cache"
+    cache_line_dir: "/home/fas/seto/bc643/scratch60/grace1/yatsm_cache/141041_clipped_TC_SE_5bandsqa_cache_0814"
 
 # Parameters common to all timeseries analysis models within YATSM package
 YATSM:
@@ -50,16 +50,16 @@ CCDCesque:
         threshold: 3.5
         min_obs: 24
         min_rmse: 150
-        test_indices: [2, 3, 4, 5]
+        test_indices: [0, 1, 2, 3, 4]
         retrain_time: 365.25
         screening: RLM
         screening_crit: 400.0
         slope_test: False
         remove_noise: True
-        dynamic_rmse: False
+        dynamic_rmse: True
         # Indices for multi-temporal cloud masking (indexed on 1)
-        green_band: 2
-        swir1_band: 5
+        green_band: 1
+        swir1_band: 4
 
 # Section for phenology fitting
 phenology:
@@ -83,12 +83,12 @@ phenology:
 # Section for training and classification
 classification:
     # Training data file
-    training_image: "training_data.gtif"
+    training_image: "/home/fas/seto/bc643/scratch60/grace1/micro/Charikot_trainingROI_180517tif.tif"
     # Training data masked values
-    roi_mask_values: [0, 255]
+    roi_mask_values: [0]
     # Date range
-    training_start: "1999-01-01"
-    training_end: "2001-01-01"
+    training_start: "2015-01-01"
+    training_end: "2017-01-01"
     training_date_format: "%Y-%m-%d"
     # Cache X feature input and y labels for training data image into file?
     cache_training:
