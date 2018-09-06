@@ -3,11 +3,11 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=baohui.chai@yale.edu
 #SBATCH --job-name=141041SEParTest
-#SBATCH --ntasks-per-node=6
-#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=12
+#SBATCH --nodes=3
 #SBATCH --cpus-per-task=1
-#SBATCH --partition=day
-#SBATCH --time=24:00:00
+#SBATCH --partition=week
+#SBATCH --time=72:00:00
 #SBATCH -o Outfiles/141041SEParTest_%A_%a.out
 
 module load Apps/R
