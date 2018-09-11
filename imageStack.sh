@@ -1,18 +1,17 @@
 #!/bin/bash
 
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=meredith.reba@yale.edu
-#SBATCH --job-name=imageStackTest
+#SBATCH --mail-user=baohui.chai@yale.edu
+#SBATCH --job-name=CongoStack
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --partition=day
-#SBATCH --time=24:00:00
-#SBATCH --mem-per-cpu=5G
-#SBATCH -o yatsm_%A_%a.out
+#SBATCH --partition=week
+#SBATCH --time=48:00:00
+#SBATCH -o Outfiles/CongoStack_%A_%a.out
 
 # running code
-#module load Langs/Python/2.7.10 
+module load Langs/Python/2.7-anaconda 
 
-# using my anaconda environment
+# using my anaconda enviornment
 source activate yatsm
-python /home/fas/seto/mra37/scripts/yatsm_unzipStackImages_right.py
+python yatsm_unzipStackImages_5bands_qa_stack_174067Congo.py
