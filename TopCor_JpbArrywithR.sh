@@ -21,6 +21,7 @@ export  file
 R --vanilla --no-readline -q  << 'EOF'
 
 ##############################################################
+#Remember to change #SBATCH --array=xxx-xxx accordingly
 file <- Sys.getenv(c('file'))
 library(rgdal)
 library(raster)
@@ -50,6 +51,7 @@ fullpathTif_se <- paste0(fullpath,"/",outfile,sep='')
 if (file.exists(fullpath)==FALSE) {
 	dir.create(fullpath, showWarnings = TRUE)
 	print(fullpathTif_se)
+	#For original image stack with 6 bands (Landsat bands 23456 & pixel qa), next line should be: tif <- stack(Oristack, bands = as.integer(c(1,2,3,4,5)))
 	tif <- stack(Oristack, bands = as.integer(c(2,3,4,5,6)))
 
 ###############################################################
@@ -59,6 +61,7 @@ if (file.exists(fullpath)==FALSE) {
 	wholesrtm_30_utm <- projectRaster(wholesrtm, tif, method="bilinear", alignOnly=FALSE, over=FALSE)
 	mysrtm <- wholesrtm_30_utm
 	#pixel qa band as mask
+	#For original image stack with 6 bands (Landsat bands 23456 & pixel qa), next line should be: m = raster(Oristack,band=6)
 	m = raster(Oristack,band=8)
 	#mark the values of water&cloud-free clear pixels as 2
 	m[m==66|m==130|m==322|m==386|m==400|m==834|m==898|m==1346] <- 2   
