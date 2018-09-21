@@ -7,7 +7,8 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=day
 #SBATCH --time=24:00:00
-#SBATCH --array=1-500
+#SBATCH --array=1-668
+#SBATCH --mem-per-cpu=30G
 #SBATCH -o Outfiles/141041clipSEJobArryTest_%A_%a.out
 
 module load Apps/R/3.3.2-generic
@@ -16,7 +17,7 @@ module load Rpkgs/RGDAL
 module load Rpkgs/RGEOS
 module load Rpkgs/XML
 
-file=$(ls /home/fas/seto/bc643/scratch60/grace1/141041clipped/L?0?141041??????????T?_clipped/L?0?141041??????????T?_clipped.tif | head -n $SLURM_ARRAY_TASK_ID | tail -1 )
+file=$(ls /home/fas/seto/bc643/scratch60/grace1/141041clipped/L?0?141041????????????_clipped/L?0?141041????????????_clipped.tif | head -n $SLURM_ARRAY_TASK_ID | tail -1 )
 export  file
 R --vanilla --no-readline -q  << 'EOF'
 
@@ -39,12 +40,12 @@ wkdir <- paste0("/home/fas/seto/bc643/scratch60/grace1/141041clipped/",strsplit(
 print(wkdir)
 setwd(wkdir)
 files1 <- list.files()
-tifNameFirstPart <- strsplit(files1[1],'[.]')[[1]][1] #e.g., LC081410412013042401T1
-outfile <- paste(tifNameFirstPart,"topCor_SE",sep='_')
 Oristack <- grep('tif', files1, value=TRUE)
 print(Oristack)
-#Stack bands 2,3,4,5,7
+tifNameFirstPart <- strsplit(Oristack,'[.]')[[1]][1] #e.g., LC081410412013042401T1
+outfile <- paste(tifNameFirstPart,"topCor_SE",sep='_')
 
+#Stack bands 2,3,4,5,7
 ###############################################################
 fullpath <- paste0("/home/fas/seto/bc643/scratch60/grace1/141041clipped_topCor_SE_5bandsAndQA_0920test/",outfile,sep='')
 fullpathTif_se <- paste0(fullpath,"/",outfile,sep='')
@@ -67,7 +68,6 @@ if (file.exists(fullpath)==FALSE) {
 	m[m==66|m==130|m==322|m==386|m==400|m==834|m==898|m==1346] <- 2   
 	if(sum(m[]!=2)==ncell(Oristack)){
 		file.remove(fullpath)
-		next
 	}
 	else{
 		#change the values of water and cloud pixels into NA
@@ -80,8 +80,10 @@ if (file.exists(fullpath)==FALSE) {
 		tif_se <- addLayer(tif_se, m)
 		writeRaster(tif_se,fullpathTif_se,format="GTiff",datatype='INT2S')
 		print(fullpathTif_se)
+
+		#copy MTL file to TopCor folder
+		file.copy(from=grep('txt', files1, value=TRUE), to=fullpath, overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
 	}
-	#copy MTL file to TopCor folder
-	file.copy(from=grep('txt', files1, value=TRUE), to=fullpath, overwrite = TRUE, recursive = FALSE, copy.mode = TRUE)
+	
 }
 EOF
