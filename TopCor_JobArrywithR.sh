@@ -2,14 +2,14 @@
 
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=baohui.chai@yale.edu
-#SBATCH --job-name=141041clipSEJobArryTest
+#SBATCH --job-name=141041clipSEJobArry
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=day
 #SBATCH --time=24:00:00
 #SBATCH --array=1-668
 #SBATCH --mem-per-cpu=30G
-#SBATCH -o Outfiles/141041clipSEJobArryTest_%A_%a.out
+#SBATCH -o Outfiles/141041clipSEJobArry_%A_%a.out
 
 module load Apps/R/3.3.2-generic
 module load Rpkgs/RASTER
@@ -64,13 +64,13 @@ if (file.exists(fullpath)==FALSE) {
 	#pixel qa band as mask
 	#For original image stack with 6 bands (Landsat bands 23457 & pixel qa), next line should be: m = raster(Oristack,band=6)
 	m = raster(Oristack,band=8)
-	#mark the values of water&cloud-free clear pixels as 2
-	m[m==66|m==130|m==322|m==386|m==400|m==834|m==898|m==1346] <- 2   
+	#mark the values of cloud-free clear & water pixels as 2
+	m[m==66|m==130|m==68|m==132|m==322|m==386|m==400|m==834|m==898|m==1346|m==324|m==388|m==836|m==900|m==1348] <- 2   
 	if(sum(m[]!=2)==ncell(Oristack)){
 		file.remove(fullpath)
 	}
 	else{
-		#change the values of water and cloud pixels into NA
+		#change the values of cloud pixels into NA
 		m[m!=2]<-NA    
 		#mask out water and cloud
 		tif_masked <- mask(tif,m)    
