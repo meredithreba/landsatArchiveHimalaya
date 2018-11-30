@@ -65,7 +65,7 @@ if (file.exists(fullpath)==FALSE) {
 	#For original image stack with 6 bands (Landsat bands 23457 & pixel qa), next line should be: m = raster(Oristack,band=6)
 	m = raster(Oristack,band=8)
 	#mark the values of cloud-free clear & water pixels as 2
-	m[m==66|m==130|m==68|m==132|m==322|m==386|m==400|m==834|m==898|m==1346|m==324|m==388|m==836|m==900|m==1348] <- 2   
+	m[m==66|m==130|m==68|m==132|m==322|m==386|m==400|m==834|m==898|m==1346|m==324|m==388|m==836|m==900] <- 2   
 	if(sum(m[]!=2)==ncell(Oristack)){
 		file.remove(fullpath)
 	}
