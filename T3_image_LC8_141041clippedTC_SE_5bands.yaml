@@ -20,7 +20,7 @@ dataset:
     # Mask band (e.g., Fmask)
     mask_band: 6
     # List of integer values to mask within the mask band
-    mask_values: [1, 68, 132, 72, 136, 80, 112, 144, 176, 96, 112, 160, 176, 224, 328, 392, 840, 904, 1350, 336, 368, 400, 432, 848, 880, 912, 944, 1352, 352, 368, 416, 432, 480, 864, 880, 928, 944, 992, 1346, 1348, 1350, 1352]
+    mask_values: [1, 72, 136, 80, 112, 144, 176, 96, 112, 160, 176, 224, 328, 392, 840, 904, 1350, 336, 368, 400, 432, 848, 880, 912, 944, 1352, 352, 368, 416, 432, 480, 864, 880, 928, 944, 992, 1346, 1348, 1350, 1352]
     # Valid range of band data
     # specify 1 range for all bands, or specify ranges for each band
     min_values: -32767
