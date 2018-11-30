@@ -72,7 +72,7 @@ if (file.exists(fullpath)==FALSE) {
 	else{
 		#change the values of cloud pixels into NA
 		m[m!=2]<-NA    
-		#mask out water and cloud
+		#mask out cloud
 		tif_masked <- mask(tif,m)    
 
 		tif_se <- topCor(tif_masked, dem = mysrtm, metaData = grep('txt', files1, value=TRUE), method = "stat")
