@@ -82,7 +82,8 @@ if (file.exists(fullpath)==FALSE) {
 		tif_se <- addLayer(tif_se, m)
 ###############################################################
 		shp = readOGR('/home/fas/seto/bc643/scratch60/grace1/Border&Topo_noHimal_shp/physio_noHimal.shp')
-
+		shp <- spTransform(shp, crs(tif))
+		
 		tif_se_masked <- mask(tif_se, shp)
 
 		writeRaster(tif_se_masked,fullpathTif_se,format="GTiff",datatype='INT2S')
