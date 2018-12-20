@@ -13,8 +13,7 @@
 # running code
 module load Apps/Matlab/R2014a
 
-matlab -nodisplay < trajectory_full_HPC_medium.m
-matlab -nodisplay < urban_only_HPC.m
+matlab -nodisplay < urban_medium_HPC.m
 #matlab -nodisplay < traj_visualization_HPC_mode.m
 
 
