@@ -24,7 +24,7 @@ for k=1:r                  %go through all items in matrix.txt
     i=startDate-minn;
     j=endDate-startDate;
     if classType==5
-        urban_index=[urban_index;pixelX,pixelY]; %select urban only trajectoroes
+        urban_index=[urban_index;pixelX,pixelY]; %select urban only trajectories
     end
 end
 urban_index=unique(urban_index,'rows');
