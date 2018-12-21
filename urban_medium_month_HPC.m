@@ -32,6 +32,7 @@ urban_index=unique(urban_index,'rows');
 urban_index(r_u,:)=[]; %delete nan rows
 
 traj=zeros(r_u,vector_len+2);
+traj_month=zeros(r_u-1,round(vector_len/30)+2);
 
 for i=1:r_u-1
     traj(i,1)=urban_index(i,1);
@@ -95,8 +96,13 @@ for k=1:r_u-1
     for m=breakxmax:vector_len+2     %fill the trajectory's ending with the last 1/2/3/4/5 value
         traj(k,m)=traj(k,breakxmax);
     end
+    for m=1:round(vector_len/30)   %turn trajectories from a day-level into a month-level
+        traj_month(k,m+2)=traj(k,m*30);
+    end
+    traj_month(k,1)=traj(k,1);    %write pixelX and pixelY
+    traj_month(k,2)=traj(k,2);
     
-    fprintf(fid,'%d ',traj(k,:));  %write out trajectories
+    fprintf(fid,'%d ',traj_month(k,:));  %write monthly trajectories into txt
     fprintf(fid,'\n ');
 end
 
