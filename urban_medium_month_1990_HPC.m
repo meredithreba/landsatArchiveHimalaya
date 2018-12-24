@@ -1,6 +1,5 @@
 clear;clc;
-array=load('/home/fas/seto/xl533/scratch60/grace6/out_HPC.txt');
-%array=load('F:\Semester1\Himalaya\CCDC\Codes\matrix_mine\out01.txt');
+array=load('/home/fas/seto/xl533/scratch60/grace2/out.txt');
 [r,c]=size(array);
 pixelXmax=max(array(:,1));
 pixelYmax=max(array(:,2));
@@ -8,7 +7,10 @@ minn=min(array(:,3));    %date min and max
 maxx=max(array(:,4));
 vector_len=maxx-minn;
 %minn=725741;maxx=736901; vector_len=11160;
-fid=fopen('/home/fas/seto/xl533/scratch60/grace6/traj_urban_medium_front_end.txt','w');
+cut_start=726467; %1990-01-01 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+cut_end=736693; %2017-12-31
+desired_len=round((cut_end-cut_start)/30.4375);
+fid=fopen('/home/fas/seto/xl533/scratch60/grace2/traj_urban_medium_front_end_month_1990.txt','w');
 fprintf(fid,'%d ',minn,maxx);
 fprintf(fid,'\n ');
 
@@ -24,7 +26,7 @@ for k=1:r                  %go through all items in matrix.txt
     i=startDate-minn;
     j=endDate-startDate;
     if classType==5
-        urban_index=[urban_index;pixelX,pixelY]; %select urban only trajectories
+        urban_index=[urban_index;pixelX,pixelY]; %select urban only trajectoroes
     end
 end
 urban_index=unique(urban_index,'rows');
@@ -32,7 +34,8 @@ urban_index=unique(urban_index,'rows');
 urban_index(r_u,:)=[]; %delete nan rows
 
 traj=zeros(r_u,vector_len+2);
-traj_month=zeros(r_u-1,round(vector_len/30)+2);
+traj_month=zeros(r_u-1,desired_len+2);
+traj_day=zeros(1,cut_end-cut_start);
 
 for i=1:r_u-1
     traj(i,1)=urban_index(i,1);
@@ -96,15 +99,19 @@ for k=1:r_u-1
     for m=breakxmax:vector_len+2     %fill the trajectory's ending with the last 1/2/3/4/5 value
         traj(k,m)=traj(k,breakxmax);
     end
-    for m=1:round(vector_len/30)   %turn trajectories from a day-level into a month-level
-        traj_month(k,m+2)=traj(k,m*30);
+    for m=1:cut_end-cut_start
+        traj_day(1,m)=traj(k,m+cut_start-minn);
     end
-    traj_month(k,1)=traj(k,1);    %write pixelX and pixelY
+    for m=1:desired_len
+        traj_month(k,m+2)=traj_day(1,round(m*30.4375)-1); %turn into a month level, 1990-01-01 to 2017-12-31
+    end
+    traj_month(k,1)=traj(k,1); 
     traj_month(k,2)=traj(k,2);
-    
-    fprintf(fid,'%d ',traj_month(k,:));  %write monthly trajectories into txt
+	
+    fprintf(fid,'%d ',traj_month(k,:));  %write out trajectories
     fprintf(fid,'\n ');
 end
 
-
 fclose(fid);
+[r_m,c_m]=size(traj_month);
+c_m-2   %the output number should be 336
