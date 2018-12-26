@@ -124,6 +124,7 @@ for k=1:r_u-1
 	
     fprintf(fid,'%d ',traj_month(k,:));  %write out trajectories
     fprintf(fid,'\n ');
+    display('done1');
 end
 
 fclose(fid);
