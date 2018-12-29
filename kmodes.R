@@ -8,5 +8,5 @@ print("DONE READ IN")
 (cl <- kmodes(B, 10))
 write.table(cl$cluster, file = "/home/fas/seto/xl533/scratch60/grace6/kmodes.txt",quote=FALSE,row.names=FALSE,col.names=FALSE)
 ######################Change cluster number (denominator) accordingly
-sum(cl$withindiff/cl$size))/10
+print(sum(cl$withindiff/cl$size))/10) #Print average within-cluster variability
 
