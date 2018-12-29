@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --partition=day,pi_seto
 #SBATCH --time=24:00:00
-#SBATCH --mem-per-cpu=9G
+#SBATCH --mem-per-cpu=19G
 #SBATCH -o Outfiles_1/from_to_144040.out
 
 # running code
