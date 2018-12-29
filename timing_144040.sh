@@ -5,9 +5,9 @@
 #SBATCH --job-name=from_to_144040
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --partition=day,pi_seto
-#SBATCH --time=24:00:00
-#SBATCH --mem-per-cpu=19G
+#SBATCH --partition=week,pi_seto
+#SBATCH --time=72:00:00
+#SBATCH --mem-per-cpu=59G
 #SBATCH -o Outfiles_1/from_to_144040.out
 
 # running code
