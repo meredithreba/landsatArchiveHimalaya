@@ -50,6 +50,7 @@ for i=1:r_u-1
                     traj(i,m)=classType;
                 end
             end
+        else break %update, 2018-12-31
         end
     end
 end
