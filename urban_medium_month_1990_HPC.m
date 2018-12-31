@@ -44,21 +44,25 @@ fprintf(fid,'%d ',minn,maxx);
 fprintf(fid,'\n ');
 
 for i=1:r_u-1
+    n0=0;                           %update, 2018-12-31
     for k=1:r
-        traj(i,1)=urban_index(i,1);  %update:12/26/2018
-        traj(i,2)=urban_index(i,2);  %write in pixelX + pixelY
-        if array(k,1)==traj(i,1) && array(k,2)==traj(i,2)
-            pixelX=array(k,1);
-            pixelY=array(k,2);
-            startDate=array(k,3);
-            endDate=array(k,4);
-            whetherBreak=array(k,5);
-            classType=array(k,6);
-            
-            ii=startDate-minn;
-            jj=endDate-startDate;
-            for m=ii+1:ii+jj  %write in trajectory
-                traj(i,m)=classType;
+        traj(i,1)=urban_index(i,1); %update 2018-12-26
+        traj(i,2)=urban_index(i,2); %write in pixelX + pixelY
+        if k-n0<6 || n0==0          %update, 2018-12-31, reduced iteration
+            if array(k,1)==traj(i,1) && array(k,2)==traj(i,2)
+                if n0==0 n0=k; end
+                pixelX=array(k,1);
+                pixelY=array(k,2);
+                startDate=array(k,3);
+                endDate=array(k,4);
+                whetherBreak=array(k,5);
+                classType=array(k,6);
+                
+                ii=startDate-minn;
+                jj=endDate-startDate;
+                for m=ii+1:ii+jj  %write in trajectory
+                    traj(i,m)=classType;
+                end
             end
         end
     end
