@@ -11,22 +11,7 @@ cut_start=726467; %1990-01-01 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cut_end=736693; %2017-12-31
 desired_len=round((cut_end-cut_start)/30.4375);
 
-urban_index=nan(1,2);
-for k=1:r                  %go through all items in matrix.txt
-    pixelX=array(k,1);
-    pixelY=array(k,2);
-    startDate=array(k,3);
-    endDate=array(k,4);
-    whetherBreak=array(k,5);
-    classType=array(k,6);
-    
-    i=startDate-minn;
-    j=endDate-startDate;
-    if classType==5
-        urban_index=[urban_index;pixelX,pixelY]; %select urban only trajectoroes
-    end
-end
-urban_index=unique(urban_index,'rows');
+urban_index=load('/home/fas/seto/xl533/scratch60/grace1/144040_urbtraj_WithinShpnoOverlay_matlab.txt'); %update 2018-12-31
 [r_u,c_u]=size(urban_index);
 urban_index(r_u,:)=[]; %delete nan rows
 fid=fopen('/home/fas/seto/xl533/scratch60/grace1/urban_index_new.txt','w');
@@ -36,6 +21,7 @@ for i=1:r_u-1
 end
 fclose(fid);
 
+array=[array;zeros(6,6)];
 traj=zeros(r_u,vector_len+2);
 traj_month=zeros(r_u-1,desired_len+2);
 traj_day=zeros(1,cut_end-cut_start);
