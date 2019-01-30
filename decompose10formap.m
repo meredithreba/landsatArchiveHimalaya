@@ -4,15 +4,15 @@ kmodes=dlmread('/home/fas/seto/xl533/scratch60/grace9/kmodes/kmodes_14.txt');   
 
 [r,c]=size(traj);
 
-index1=[traj(1:4911,1:2),kmodes(1:4911,1)]; %4911
+index1=[traj(1:4912,1:2),kmodes(1:4912,1)]; %4912
 fid=fopen('/home/fas/seto/xl533/scratch60/grace9/decompose10/139041.txt','w');
-for i=1:4911
+for i=1:4912
     fprintf(fid,'%d ',index1(i,:));
     fprintf(fid,'\n ');
 end
 fclose(fid);
 
-index2=[traj(4912:550890,1:2),kmodes(4912:550890,1)];   %545979
+index2=[traj(4913:550891,1:2),kmodes(4913:550891,1)];   %545979
 fid=fopen('/home/fas/seto/xl533/scratch60/grace9/decompose10/140041.txt','w');
 for i=1:545979
     fprintf(fid,'%d ',index2(i,:));
@@ -20,7 +20,7 @@ for i=1:545979
 end
 fclose(fid);
 
-index3=[traj(550891:953318,1:2),kmodes(550891:953318,1)];   %402428
+index3=[traj(550892:953319,1:2),kmodes(550892:953319,1)];   %402428
 fid=fopen('/home/fas/seto/xl533/scratch60/grace9/decompose10/141041.txt','w');
 for i=1:402428
     fprintf(fid,'%d ',index3(i,:));
@@ -28,7 +28,7 @@ for i=1:402428
 end
 fclose(fid);
 
-index4=[traj(953319:1272202,1:2),kmodes(953319:1272202,1)];   %318884
+index4=[traj(953320:1272203,1:2),kmodes(953320:1272203,1)];   %318884
 fid=fopen('/home/fas/seto/xl533/scratch60/grace9/decompose10/142041.txt','w');
 for i=1:318884
     fprintf(fid,'%d ',index4(i,:));
@@ -36,7 +36,7 @@ for i=1:318884
 end
 fclose(fid);
 
-index5=[traj(1272203:1490646,1:2),kmodes(1272203:1490646,1)];   %218444
+index5=[traj(1272204:1490647,1:2),kmodes(1272204:1490647,1)];   %218444
 fid=fopen('/home/fas/seto/xl533/scratch60/grace9/decompose10/143041.txt','w');
 for i=1:218444
     fprintf(fid,'%d ',index5(i,:));
@@ -44,7 +44,7 @@ for i=1:218444
 end
 fclose(fid);
 
-index6=[traj(1490647:1569388,1:2),kmodes(1490647:1569388,1)];   %78742
+index6=[traj(1490648:1569389,1:2),kmodes(1490648:1569389,1)];   %78742
 fid=fopen('/home/fas/seto/xl533/scratch60/grace9/decompose10/144040.txt','w');
 for i=1:78742
     fprintf(fid,'%d ',index6(i,:));
@@ -52,7 +52,7 @@ for i=1:78742
 end
 fclose(fid);
 
-index7=[traj(1569389:1615261,1:2),kmodes(1569389:1615261,1)];   %45872
+index7=[traj(1569390:1615261,1:2),kmodes(1569390:1615261,1)];   %45872
 fid=fopen('/home/fas/seto/xl533/scratch60/grace9/decompose10/142040.txt','w');
 for i=1:45872
     fprintf(fid,'%d ',index7(i,:));
