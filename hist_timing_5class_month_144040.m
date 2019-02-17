@@ -14,24 +14,24 @@ for k=1:r                  %go through all items in matrix.txt
     classType=array(k,6);
     
     if whetherBreak~=0 && classType==5      %find the pixels that change from urban
-        if endDate>726467 && endDate<736693 
-        if array(k+1,6)==1 endDate_month=round((endDate-365.25*1989)*12/365); breaktime_urban_from(1,endDate_month)=breaktime_urban_from(1,endDate_month)+1; end
-        if array(k+1,6)==2 endDate_month=round((endDate-365.25*1989)*12/365); breaktime_urban_from(2,endDate_month)=breaktime_urban_from(2,endDate_month)+1; end
-        if array(k+1,6)==3 endDate_month=round((endDate-365.25*1989)*12/365); breaktime_urban_from(3,endDate_month)=breaktime_urban_from(3,endDate_month)+1; end
-        if array(k+1,6)==4 endDate_month=round((endDate-365.25*1989)*12/365); breaktime_urban_from(4,endDate_month)=breaktime_urban_from(4,endDate_month)+1; end
-        if array(k+1,6)==5 endDate_month=round((endDate-365.25*1989)*12/365); breaktime_urban_from(5,endDate_month)=breaktime_urban_from(5,endDate_month)+1; end
+        if endDate>726466 && endDate<736694 
+        if array(k+1,6)==1 endDate_month=ceil((endDate-726466)*12/365.2425); breaktime_urban_from(1,endDate_month)=breaktime_urban_from(1,endDate_month)+1; end
+        if array(k+1,6)==2 endDate_month=ceil((endDate-726466)*12/365.2425); breaktime_urban_from(2,endDate_month)=breaktime_urban_from(2,endDate_month)+1; end
+        if array(k+1,6)==3 endDate_month=ceil((endDate-726466)*12/365.2425); breaktime_urban_from(3,endDate_month)=breaktime_urban_from(3,endDate_month)+1; end
+        if array(k+1,6)==4 endDate_month=ceil((endDate-726466)*12/365.2425); breaktime_urban_from(4,endDate_month)=breaktime_urban_from(4,endDate_month)+1; end
+        if array(k+1,6)==5 endDate_month=ceil((endDate-726466)*12/365.2425); breaktime_urban_from(5,endDate_month)=breaktime_urban_from(5,endDate_month)+1; end
         end
     end
     
     
     if k~=1 && classType==5 && pixelX==array(k-1,1) && pixelY==array(k-1,2)  %find the pixels that change into urban
         last_time=array(k-1,4);
-        if last_time>726467 && last_time<736693 
-            if array(k-1,6)==1 last_time_month=round((last_time-365.25*1989)*12/365); breaktime_urban_to(1,last_time_month)=breaktime_urban_to(1,last_time_month)+1; end
-            if array(k-1,6)==2 last_time_month=round((last_time-365.25*1989)*12/365); breaktime_urban_to(2,last_time_month)=breaktime_urban_to(2,last_time_month)+1; end
-            if array(k-1,6)==3 last_time_month=round((last_time-365.25*1989)*12/365); breaktime_urban_to(3,last_time_month)=breaktime_urban_to(3,last_time_month)+1; end
-            if array(k-1,6)==4 last_time_month=round((last_time-365.25*1989)*12/365); breaktime_urban_to(4,last_time_month)=breaktime_urban_to(4,last_time_month)+1; end
-            if array(k-1,6)==5 last_time_month=round((last_time-365.25*1989)*12/365); breaktime_urban_to(5,last_time_month)=breaktime_urban_to(5,last_time_month)+1; end
+        if last_time>726466 && last_time<736694 
+            if array(k-1,6)==1 last_time_month=ceil((last_time-726466)*12/365.2425); breaktime_urban_to(1,last_time_month)=breaktime_urban_to(1,last_time_month)+1; end
+            if array(k-1,6)==2 last_time_month=ceil((last_time-726466)*12/365.2425); breaktime_urban_to(2,last_time_month)=breaktime_urban_to(2,last_time_month)+1; end
+            if array(k-1,6)==3 last_time_month=ceil((last_time-726466)*12/365.2425); breaktime_urban_to(3,last_time_month)=breaktime_urban_to(3,last_time_month)+1; end
+            if array(k-1,6)==4 last_time_month=ceil((last_time-726466)*12/365.2425); breaktime_urban_to(4,last_time_month)=breaktime_urban_to(4,last_time_month)+1; end
+            if array(k-1,6)==5 last_time_month=ceil((last_time-726466)*12/365.2425); breaktime_urban_to(5,last_time_month)=breaktime_urban_to(5,last_time_month)+1; end
         end
     end
 end
@@ -51,5 +51,3 @@ for i=1:5
    fprintf(fid,'\n ');
 end
 fclose(fid);
-
-
