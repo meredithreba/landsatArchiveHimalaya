@@ -68,5 +68,4 @@ for k=1:ro_new
     fprintf(fid,'\n ');
 end
 
-
 fclose(fid);
