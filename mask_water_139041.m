@@ -28,7 +28,7 @@ rw_start
 rw_end
 
 for i=1:ro
-	% i
+	i
 	if i>ro
 		break
 	else
