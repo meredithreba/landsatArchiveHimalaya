@@ -94,6 +94,17 @@ for k=1:r_u-1
     fprintf(fid,'\n ');
 end
 
+for k=1:r_u-1
+    index=0;
+    for m=3:338
+        if traj_month(k,m)==0 
+            index=m; 
+            for j=index:338
+                traj_month(k,j)=traj_month(k,index-1);  %fix the issue of trajs end in 0 (model ends earlier than 2017-12-31)
+            end
+        end
+    end
+end
 
 fclose(fid);
  
