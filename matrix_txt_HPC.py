@@ -13,5 +13,5 @@ for i in range(0,len(files)):
     record=(npz['record.npy'])
     for j in range(0,len(record)):
         b=record[j]
-        print>>f,b[6],b[7],b[0],b[1],b[2],b[10] #Pixel X, Pixel Y, model_StartDate, model_EndDate, model_breakDate(0=no change)
+        print>>f,b[6],b[7],b[0],b[1],b[2],b[10] #Pixel X, Pixel Y, model_StartDate, model_EndDate, model_breakDate(0=no change), class
 f.close()
